@@ -19,7 +19,6 @@ public class Projectile : MonoBehaviour
 
     private void Awake()
     {
-        //enabled = true;
         speedSaved = speed;
         renderer = GetComponentInChildren<SpriteRenderer>();
         particles = GetComponentInChildren<ParticleSystem>();
@@ -46,7 +45,7 @@ public class Projectile : MonoBehaviour
         }
         else if (collision.CompareTag("Enemy"))
         {
-            Debug.Log("Hit enemy");
+            //Debug.Log("Hit enemy");
             hitEnemy = true;
             collision.gameObject.GetComponent<HealthSystem>().ChangeHealth(dmg, false);
             StartCoroutine(Destroy());

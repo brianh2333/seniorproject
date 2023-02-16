@@ -17,7 +17,6 @@ public class EnemyHealthBar : MonoBehaviour
     {
         healthSystem = GetComponentInParent<HealthSystem>();
         healthSystem.onHealthChanged += ChangeHealth;
-        //gameObject.SetActive(false);
     }
 
     private void OnDisable()
@@ -25,13 +24,9 @@ public class EnemyHealthBar : MonoBehaviour
         healthSystem.onHealthChanged -= ChangeHealth;
     }
 
-    private void OnEnable()
+    void ChangeHealth(float newHealth, float maxHealth)
     {
-        healthSystem.onHealthChanged += ChangeHealth;
-    }
-
-    void ChangeHealth(float newHealth, float prevHealth, float maxHealth)
-    {
+        Debug.Log("Calling ChangeHealth");
         slider.maxValue = maxHealth;
         slider.value = newHealth;
         slider.gameObject.SetActive(newHealth < maxHealth);

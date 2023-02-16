@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class HealthSystem : MonoBehaviour
 {
 
-    public delegate void OnHealthChanged(float  prevHealth, float health, float maxHealth);
+    public delegate void OnHealthChanged(float health, float maxHealth);
     public event OnHealthChanged onHealthChanged = delegate { };
 
 
@@ -16,10 +16,10 @@ public class HealthSystem : MonoBehaviour
     public bool isPlayer = false;
 
 
-    void Awake()
+    void Start()
     {
         health = maxHealth;
-        onHealthChanged(maxHealth, maxHealth, maxHealth);
+        onHealthChanged(maxHealth, maxHealth);
     }
 
     private void Update()
@@ -48,7 +48,7 @@ public class HealthSystem : MonoBehaviour
                 else
                     health += amount;
                 health = Mathf.Clamp(health, 0, maxHealth);
-                onHealthChanged(prevHealth, health, maxHealth);
+                onHealthChanged(health, maxHealth);
             }
         }
         else
@@ -63,8 +63,8 @@ public class HealthSystem : MonoBehaviour
                 else
                     health -= amount;
                 health = Mathf.Clamp(health, 0, maxHealth);
-                onHealthChanged(prevHealth, health, maxHealth);
-                Debug.Log("Taking dmg: " + amount);
+                onHealthChanged(health, maxHealth);
+                //Debug.Log("Taking dmg: " + amount);
             }
         }
 

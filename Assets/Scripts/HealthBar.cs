@@ -24,7 +24,7 @@ public class HealthBar : MonoBehaviour
         healthSystem.onHealthChanged -= ChangeHealth;
     }
 
-    void ChangeHealth(float prevHealth, float newHealth, float maxHealth)
+    void ChangeHealth(float newHealth, float maxHealth)
     {
         slider.maxValue = maxHealth;
         slider.value = newHealth;
