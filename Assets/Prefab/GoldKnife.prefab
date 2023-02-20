@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 476122ca2d24626489e75dc940027f17, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33cb5170ace261f4ab151c23258c550b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4907,9 +4907,9 @@ GameObject:
   - component: {fileID: 7370789490497541317}
   - component: {fileID: 2487351745761830541}
   - component: {fileID: 1651140093634244052}
-  - component: {fileID: 1836131798863098771}
+  - component: {fileID: 1836045674199378336}
   m_Layer: 0
-  m_Name: Knife
+  m_Name: GoldKnife
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4946,7 +4946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifeTime: 0.5
-  dmg: 10
+  dmg: 20
 --- !u!61 &1651140093634244052
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4973,7 +4973,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.11011474, y: 0.11291051}
   m_EdgeRadius: 0
---- !u!50 &1836131798863098771
+--- !u!50 &1836045674199378336
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0

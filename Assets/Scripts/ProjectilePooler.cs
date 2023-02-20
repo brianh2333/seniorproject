@@ -10,6 +10,7 @@ public class ProjectilePooler : MonoBehaviour
         public string tag;
         public GameObject prefab;
         public int size;
+
     }
 
     public static ProjectilePooler Instance;
@@ -21,6 +22,18 @@ public class ProjectilePooler : MonoBehaviour
 
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
+
+    public int GetPoolSize(string tag)
+    {
+        foreach (Pool p in pools)
+        {
+            if (p.tag == tag)
+            {
+                return p.size;
+            }
+        }
+        return 0;
+    }
     // Start is called before the first frame update
     void Start()
     {
