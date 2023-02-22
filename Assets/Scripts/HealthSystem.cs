@@ -6,8 +6,12 @@ using UnityEngine.SceneManagement;
 public class HealthSystem : MonoBehaviour
 {
 
+
     public delegate void OnHealthChanged(float health, float maxHealth);
     public event OnHealthChanged onHealthChanged = delegate { };
+
+    public delegate void OnHealthIncreased(float health);
+    public event OnHealthIncreased onHealthIncreased = delegate { };
 
 
     [SerializeField] private float health;
@@ -20,6 +24,14 @@ public class HealthSystem : MonoBehaviour
     {
         health = maxHealth;
         onHealthChanged(maxHealth, maxHealth);
+    }
+
+    void onEnable() {
+        onHealthIncreased += IncreaseHealth;
+    }
+
+    void onDisable() {
+        onHealthIncreased -= IncreaseHealth;
     }
 
     private void Update()
@@ -70,8 +82,18 @@ public class HealthSystem : MonoBehaviour
 
     }
 
+    public void IncreaseHealth(float amount) {
+        maxHealth += amount;
+        health = maxHealth;
+        onHealthIncreased(amount);
+    }
+
     private void Despawn()
     {
         gameObject.SetActive(false);
+    }
+
+    public float GetMaxHealth() {
+        return maxHealth;
     }
 }

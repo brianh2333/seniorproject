@@ -32,6 +32,10 @@ public class PickUp : MonoBehaviour
                     player.GetComponent<PlayerController>().StartSprint();
                     Destroy(gameObject);
                 }
+                if (name.Contains("Armor")) {
+                    player.GetComponent<HealthSystem>().IncreaseHealth(10);
+                    Destroy(gameObject);
+                }
             }
         }
     }
