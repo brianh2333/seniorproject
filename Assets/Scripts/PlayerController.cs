@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float sprint = 1;
     public float sprintDuration = 2;
 
-    Vector2 moveDirection;
+    Vector2 movementInput;
     Vector2 mousePosition;
 
     void Start()
@@ -23,19 +24,22 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        ProcessInputs();
+        animator.SetFloat("Magnitude", movementInput.magnitude);
 
-        animator.SetFloat("Magnitude", moveDirection.magnitude);
-
-        if (moveDirection.x < 0)
+        if (movementInput.x < 0)
         {
             Flip(true);
         }
-        else if (moveDirection.x > 0)
+        else if (movementInput.x > 0)
         {
             Flip(false);
         }
 
+    }
+
+    private void OnMove(InputValue inputValue)
+    {
+        movementInput = inputValue.Get<Vector2>();
     }
 
     private void FixedUpdate()
@@ -45,18 +49,13 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        //rb.velocity = new Vector2(movementInput.x * moveSpeed, movementInput.y * moveSpeed);
+        rb.velocity = movementInput * moveSpeed;
     }
 
     private void Flip(bool flip)
     {
         GetComponentInChildren<SpriteRenderer>().flipX = flip;
-    }
-
-    private void ProcessInputs()
-    {
-        moveDirection.x = Input.GetAxisRaw("Horizontal");
-        moveDirection.y = Input.GetAxisRaw("Vertical");
     }
 
     public void StartSprint()

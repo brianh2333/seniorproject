@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
+
+    NavMeshAgent agent;
     public Transform shotPosition;
 
     Rigidbody2D rb;
@@ -12,8 +15,9 @@ public class EnemyMovement : MonoBehaviour
 
     Vector2 movement;
 
-    [SerializeField] private float speed;
+    //[SerializeField] private float speed;
     [SerializeField] private float chaseDistance;
+    //[SerializeField] private float minDistance;
 
     [SerializeField] private LayerMask canSee;
 
@@ -22,22 +26,26 @@ public class EnemyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         shotPosition = transform.GetChild(0).transform;
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     private void Update()
     {
-        Move();
+        SetAgentPosition();
     }
 
     // Update is called once per frame
-    void Move()
+    void SetAgentPosition()
     {
-        //float distance = Vector2.Distance(transform.position, player.transform.position);
+        float distance = Vector2.Distance(transform.position, player.transform.position);
 
 
         if (CanSeePlayer(chaseDistance))
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            agent.SetDestination(player.transform.position);
         }
 
     }
@@ -45,15 +53,21 @@ public class EnemyMovement : MonoBehaviour
     bool CanSeePlayer(float dist)
     {
         RaycastHit2D hit = Physics2D.Raycast(shotPosition.position, shotPosition.transform.up, dist, canSee);
-        Debug.DrawRay(shotPosition.position, shotPosition.transform.up * dist, Color.blue);
+        
 
         if (hit.collider != null)
         {
             if (hit.collider.gameObject.CompareTag("Player"))
             {
+                Debug.DrawRay(shotPosition.position, shotPosition.transform.up * dist, Color.green);
                 return true;
             }
+            else
+                Debug.DrawRay(shotPosition.position, shotPosition.transform.up * dist, Color.blue);
         }
+        else
+            Debug.DrawRay(shotPosition.position, shotPosition.transform.up * dist, Color.red);
+
         return false;
     }
 }

@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3265284597816869792}
   animator: {fileID: 3265284598296247685}
-  moveSpeed: 4
+  moveSpeed: 3
   sprint: 1
   sprintDuration: 2
 --- !u!50 &3265284597816869792
@@ -250,7 +250,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -468493853, guid: 561c267b1238a7740b98e4f1075dc484, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -79,15 +79,20 @@ public class EnemyFireProjectile : MonoBehaviour
     bool CanSeePlayer(float dist)
     {
         RaycastHit2D hit = Physics2D.Raycast(shotPosition.position, shotPosition.transform.up, dist, canHit);
-        Debug.DrawRay(shotPosition.position, shotPosition.transform.up * dist, Color.red);
 
         if (hit.collider != null)
         {
             if (hit.collider.gameObject.CompareTag("Player"))
             {
+                Debug.DrawRay(shotPosition.position, shotPosition.transform.up * dist, Color.cyan);
                 return true;
             }
+            else
+                Debug.DrawRay(shotPosition.position, shotPosition.transform.up * dist, Color.black);
         }
+        else
+            Debug.DrawRay(shotPosition.position, shotPosition.transform.up * dist, Color.magenta);
+
         return false;
     }
 
