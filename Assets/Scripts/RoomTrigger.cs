@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class RoomTrigger : MonoBehaviour
 {
-    public List<Transform> rooms;
-    public List<Transform> triggers;
-    public List<Transform> cameras;
-    void Awake()
-    {
-        //Add rooms, triggers, and cameras to their respective lists
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Transform t0 = transform.GetChild(i);
-            rooms.Add(t0);
-            Transform t1 = t0.GetChild(0);
-            triggers.Add(t1);
-            Transform t2 = t0.GetChild(1);
-            cameras.Add(t2);
+
+    //All triggers stay active.
+    //When player walks into trigger:
+    //1. set new room's camera to active.
+    //2. set previous room's camera to inactive.
+    //How to get new room: 
+    //
+
+
+    [SerializeField]
+    private int roomID;
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Player")) {
+            //InstantiateRoomTriggers.Instance.cameras;
         }
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SetRoomID(int id) {
+        roomID = id;
     }
+
+    public int GetRoomID() {
+        return roomID;
+    }
+
 }

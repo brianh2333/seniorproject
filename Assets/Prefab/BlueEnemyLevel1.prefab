@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 4982020742905869310}
   - component: {fileID: 3808545428649232089}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: BlueEnemyLevel1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,11 +393,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPosition: {fileID: 4982020742741763108}
   prefab: {fileID: 695765747111586531, guid: 9f156b2cf2eb32e49af739161bb34d44, type: 3}
-  player: {fileID: 0}
-  reloadMaxTime: 1
-  maxAmmo: 3
+  player: {fileID: 3265284597816869794, guid: 9289b147c63bce048b6fc2986544ed3b, type: 3}
+  reloadMaxTime: 2
+  maxAmmo: 1
   fireRate: 0.1
-  distance: 5
+  distance: 3
   canHit:
     serializedVersion: 2
     m_Bits: 768
@@ -415,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPosition: {fileID: 0}
   player: {fileID: 3265284597816869794, guid: 9289b147c63bce048b6fc2986544ed3b, type: 3}
-  chaseDistance: 7
+  chaseDistance: 3
   canSee:
     serializedVersion: 2
     m_Bits: 768

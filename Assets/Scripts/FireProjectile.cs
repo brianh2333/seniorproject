@@ -13,12 +13,13 @@ public class FireProjectile : MonoBehaviour
     public List<GameObject> powerUpAmmoUI;
 
     [SerializeField]
-    private int maxAmmo;
+    private int ammoMax;
     private int ammo;
 
     [SerializeField]
-    private int powerUpMaxAmmo;
+    private int powerUpAmmoMax;
     private int powerUpAmmo;
+    private int powerUpAmmoIndex;
 
     public float reloadMaxTime;
     public float fireRate;
@@ -27,11 +28,12 @@ public class FireProjectile : MonoBehaviour
 
     private void Awake()
     {
-        maxAmmo = 10;//ProjectilePooler.Instance.GetPoolSize("Knife");
-        ammo = maxAmmo - 1;
+        ammoMax = 10;//ProjectilePooler.Instance.GetPoolSize("Knife");
+        ammo = ammoMax - 1;
 
-        powerUpMaxAmmo = 3;//ProjectilePooler.Instance.GetPoolSize("GoldKnife");
+        powerUpAmmoMax = 3;//ProjectilePooler.Instance.GetPoolSize("GoldKnife");
         powerUpAmmo = 0;
+        powerUpAmmoIndex = 0;
 
         reloadTime = reloadMaxTime;
     }
@@ -39,7 +41,7 @@ public class FireProjectile : MonoBehaviour
     void Update()
     {
        
-        if (ammo < (maxAmmo - 1))
+        if (ammo < (ammoMax - 1))
         {
             reloadTime -= Time.deltaTime;
             if (reloadTime <= 0)
@@ -53,12 +55,13 @@ public class FireProjectile : MonoBehaviour
 
         if (fireRateSeconds <= 0)
         {
-            if (Input.GetMouseButtonDown(0) && powerUpAmmo >= 0)
+            if (Input.GetMouseButtonDown(0) && powerUpAmmo > 0)
             {
+                powerUpAmmo--;
                 Vector3 pos = new Vector3(shotPosition.position.x, shotPosition.position.y, 0);
                 projPooler.SpawnFromPool("GoldKnife", pos, shotPosition.rotation);
                 fireRateSeconds = fireRate;
-                powerUpAmmoUI[powerUpAmmo--].SetActive(false);
+                powerUpAmmoUI[powerUpAmmoIndex--].SetActive(false);
             }
             else if (Input.GetMouseButtonDown(0) && ammo >= 0)
             {
@@ -75,9 +78,10 @@ public class FireProjectile : MonoBehaviour
 
     public void AddPowerUpAmmo()
     {
-        powerUpAmmo = powerUpMaxAmmo - 1;
+        powerUpAmmo = powerUpAmmoMax;
+        powerUpAmmoIndex = powerUpAmmoMax - 1;
 
-        for (int i = 0; i < powerUpMaxAmmo; i++)
+        for (int i = 0; i < powerUpAmmoMax; i++)
             powerUpAmmoUI[i].SetActive(true);
     }
 
