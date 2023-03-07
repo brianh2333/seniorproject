@@ -375,7 +375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67920f2c3a285554e8937585d59d8130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesRemaining: {fileID: 0}
   health: 0
   maxHealth: 35
   isPlayer: 0
@@ -397,7 +396,7 @@ MonoBehaviour:
   reloadMaxTime: 2
   maxAmmo: 1
   fireRate: 0.1
-  distance: 3
+  distance: 3.5
   canHit:
     serializedVersion: 2
     m_Bits: 768
@@ -415,7 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotPosition: {fileID: 0}
   player: {fileID: 3265284597816869794, guid: 9289b147c63bce048b6fc2986544ed3b, type: 3}
-  chaseDistance: 3
+  chaseDistance: 4
   canSee:
     serializedVersion: 2
     m_Bits: 768

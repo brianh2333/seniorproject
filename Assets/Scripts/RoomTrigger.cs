@@ -5,29 +5,30 @@ using UnityEngine;
 public class RoomTrigger : MonoBehaviour
 {
 
-    //All triggers stay active.
-    //When player walks into trigger:
-    //1. set new room's camera to active.
-    //2. set previous room's camera to inactive.
-    //How to get new room: 
-    //
+    public GameObject camera;
 
 
-    [SerializeField]
-    private int roomID;
+    private void Start()
+    {
+        camera = transform.GetChild(0).gameObject;
+    }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            //InstantiateRoomTriggers.Instance.cameras;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !collision.isTrigger)
+        {
+            Debug.Log("calling RoomTrigger");
+            camera.SetActive(true);
+            EnemiesRemaining.Instance.SetUI(transform);
         }
     }
 
-    public void SetRoomID(int id) {
-        roomID = id;
-    }
-
-    public int GetRoomID() {
-        return roomID;
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !collision.isTrigger)
+        {
+            camera.SetActive(false);
+        }
     }
 
 }

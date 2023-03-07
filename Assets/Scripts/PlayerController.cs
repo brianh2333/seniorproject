@@ -9,8 +9,10 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
 
     public float moveSpeed = 5;
-    public float sprint = 1;
-    public float sprintDuration = 2;
+    public float sprintSpeed;
+    //public float sprintDuration = 2;
+
+    private float moveSpeedSaved;
 
     Vector2 movementInput;
     Vector2 mousePosition;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        moveSpeedSaved = moveSpeed;
     }
 
     // Update is called once per frame
@@ -34,6 +37,8 @@ public class PlayerController : MonoBehaviour
         {
             Flip(false);
         }
+
+        StartSprint();
 
     }
 
@@ -60,15 +65,20 @@ public class PlayerController : MonoBehaviour
 
     public void StartSprint()
     {
-        StartCoroutine(Sprint());
+        if (Input.GetKeyDown(KeyCode.LeftShift) && moveSpeed < sprintSpeed) {
+            moveSpeed = sprintSpeed;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift) && moveSpeed > moveSpeedSaved) {
+            moveSpeed = moveSpeedSaved;
+        }
     }
-    private IEnumerator Sprint()
-    {
-        Debug.Log("Sprint start");
-        moveSpeed += sprint;
-        yield return new WaitForSeconds(sprintDuration);
-        moveSpeed -= sprint;
-        Debug.Log("Sprint end");
-    }
+    // private IEnumerator Sprint()
+    // {
+    //     Debug.Log("Sprint start");
+    //     moveSpeed += sprint;
+    //     yield return new WaitForSeconds(sprintDuration);
+    //     moveSpeed -= sprint;
+    //     Debug.Log("Sprint end");
+    // }
 
 }

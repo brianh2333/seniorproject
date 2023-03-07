@@ -13,7 +13,7 @@ public class HealthSystem : MonoBehaviour
     public delegate void OnHealthIncreased(float health);
     public event OnHealthIncreased onHealthIncreased = delegate { };
 
-    public EnemiesRemaining enemiesRemaining;
+    //public EnemiesRemaining enemiesRemaining;
 
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
@@ -25,11 +25,6 @@ public class HealthSystem : MonoBehaviour
     {
         health = maxHealth;
         onHealthChanged(maxHealth, maxHealth);
-    }
-
-    private void Awake()
-    {
-        enemiesRemaining = GameObject.FindGameObjectWithTag("EnemiesCount").GetComponent<EnemiesRemaining>();
     }
 
     void onEnable() {
@@ -98,9 +93,10 @@ public class HealthSystem : MonoBehaviour
     {
         if (!isPlayer)
         {
-            enemiesRemaining.Remove();
+            EnemiesRemaining.Instance.Remove();
         }
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        //gameObject.SetActive(false);
     }
 
     public float GetMaxHealth() {
