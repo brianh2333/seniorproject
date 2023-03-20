@@ -13,6 +13,7 @@ public class HealthBar : MonoBehaviour
 
     public Image fill;
 
+
     private void Awake()
     {
         fill.color = gradient.Evaluate(1f);

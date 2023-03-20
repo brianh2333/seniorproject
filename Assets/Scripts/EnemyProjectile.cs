@@ -46,7 +46,7 @@ public class EnemyProjectile : MonoBehaviour
         }
         else if (collision.CompareTag("Player"))
         {
-            Debug.Log("Hit player");
+            //Debug.Log("Hit player");
             hitPlayer = true;
             collision.gameObject.GetComponent<HealthSystem>().ChangeHealth(dmg, false);
             StartCoroutine(Destroy());

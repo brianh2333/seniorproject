@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public SprintSystem sprintSystem;
+
     public Rigidbody2D rb;
     public Animator animator;
 
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        sprintSystem = GetComponent<SprintSystem>();
         rb = GetComponent<Rigidbody2D>();
         moveSpeedSaved = moveSpeed;
     }

@@ -5,10 +5,10 @@ using UnityEngine;
 public class RoomTrigger : MonoBehaviour
 {
 
-    public GameObject camera;
+    private GameObject camera;
 
 
-    private void Start()
+    private void Awake()
     {
         camera = transform.GetChild(0).gameObject;
     }
@@ -17,7 +17,7 @@ public class RoomTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            Debug.Log("calling RoomTrigger");
+            //Debug.Log("calling RoomTrigger");
             camera.SetActive(true);
             EnemiesRemaining.Instance.SetUI(transform);
         }

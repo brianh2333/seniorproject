@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class EnemiesRemaining : MonoBehaviour
 {
-//Start at -1 because we need the last index
-    private int enemyIndex = -1;
+    //Enemies per room
+    [SerializeField] private int enemyCount = 0;
     //Room count
-    private int currRoomIndex = 0;
+    [SerializeField] private int currRoomIndex = 0;
 
     public Image prefab;
 
     public GameObject[] rooms;
+    public GameObject[] doors;
 
-    private bool [] roomsCleared;
+    private bool [] roomsActivated;
 
     public static EnemiesRemaining Instance { get; private set; }
 
@@ -30,33 +31,49 @@ public class EnemiesRemaining : MonoBehaviour
     void Awake()
     {
         rooms = GameObject.FindGameObjectsWithTag("Room");
-        roomsCleared = new bool[rooms.Length];
-        //SetUI(rooms[0].transform);
+        doors = GameObject.FindGameObjectsWithTag("Door");
+        roomsActivated = new bool[rooms.Length];
     }
 
     public void Remove()
     {
-        Debug.Log("Removing");
-        transform.GetChild(enemyIndex--).gameObject.SetActive(false);
+        StartCoroutine(RemoveSkull());
     }
 
     public void SetUI(Transform room)
     {
         Debug.Log("Room: " + room.gameObject.name);
-        // if (transform.childCount > 0)
-        // {
-        //     for (int i = 0; i < transform.childCount; i++)
-        //     {
-        //         Destroy(transform.GetChild(i).gameObject);
-        //     }
-        // }
 
-
-        enemyIndex = room.GetChild(1).childCount;
-        Debug.Log("enemyIndex: " + enemyIndex);
-        for (int i = 0; i < enemyIndex; i++)
+        if (roomsActivated[currRoomIndex] == false && room.gameObject == rooms[currRoomIndex])
         {
-            Instantiate(prefab, transform);
+            roomsActivated[currRoomIndex] = true;
+            enemyCount = room.GetChild(1).childCount;
+            Debug.Log("enemyCount: " + enemyCount);
+            for (int i = 0; i < enemyCount; i++)
+            {
+                Instantiate(prefab, transform);
+            }
+        }
+    }
+
+    public void RoomClear()
+    {
+        //roomsActivated[currRoomIndex] = true;
+        doors[currRoomIndex++].SetActive(false);
+        Debug.Log("Room clear");
+    }
+
+    //Necessary otherwise the childCount will not update fast enough after a Skull is destroyed.
+    IEnumerator RemoveSkull()
+    {
+        Debug.Log("Removing " + transform.GetChild(0).gameObject.name);
+        Destroy(transform.GetChild(0).gameObject);
+        yield return new WaitForSeconds(.1f);
+        Debug.Log("ChildCount: " + transform.childCount);
+
+        if (transform.childCount == 0)
+        {
+            RoomClear();
         }
     }
 

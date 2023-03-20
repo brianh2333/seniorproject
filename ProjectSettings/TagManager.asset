@@ -14,6 +14,8 @@ TagManager:
   - EnemiesCount
   - VCamera
   - Room
+  - Door
+  - DoorUI
   layers:
   - Default
   - TransparentFX

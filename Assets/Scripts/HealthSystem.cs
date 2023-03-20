@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class HealthSystem : MonoBehaviour
 {
@@ -17,6 +17,8 @@ public class HealthSystem : MonoBehaviour
 
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
+
+    public GameObject DeathScreen;
 
     public bool isPlayer = false;
 
@@ -39,7 +41,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (health <= 0 && isPlayer)
         {
-            SceneManager.LoadScene("Level1");
+            DeathScreen.SetActive(true);
         }
         if (health <= 0 && !isPlayer)
         {
@@ -96,7 +98,6 @@ public class HealthSystem : MonoBehaviour
             EnemiesRemaining.Instance.Remove();
         }
         Destroy(gameObject);
-        //gameObject.SetActive(false);
     }
 
     public float GetMaxHealth() {
