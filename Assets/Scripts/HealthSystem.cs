@@ -42,6 +42,7 @@ public class HealthSystem : MonoBehaviour
         if (health <= 0 && isPlayer)
         {
             DeathScreen.SetActive(true);
+            gameObject.SetActive(false);
         }
         if (health <= 0 && !isPlayer)
         {

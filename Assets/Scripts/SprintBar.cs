@@ -5,31 +5,116 @@ using UnityEngine.UI;
 
 public class SprintBar : MonoBehaviour
 {
-    public HealthSystem healthSystem;
+    // public delegate void OnSprintChanged(float health, float maxHealth);
+    // public event OnSprintChanged onSprintChanged = delegate { };
 
     public Slider slider;
 
-    public Image fill;
+    //public Image fill;
 
     bool canRegen = false;
 
+    [SerializeField] private float maxSprintTime = 3f;
+    
+    //How long until sprint can regen.
+    [SerializeField] private float maxWaitTime = 2f;
+    [SerializeField] private float currWaitTime;
 
-    private void Awake()
+    [SerializeField] private bool inUse = false;
+
+
+    private void Start()
     {
-        healthSystem.onHealthChanged += ChangeSprint;
+        slider.maxValue = maxSprintTime;
+        slider.value = maxSprintTime;
+        currWaitTime = maxWaitTime;
     }
 
-    private void OnDisable()
+    // Update is called once per frame
+    void Update()
     {
-        healthSystem.onHealthChanged -= ChangeSprint;
+        if (inUse && currWaitTime >= maxWaitTime)
+        {
+            if (slider.value > 0f)
+            {
+                slider.value -= Time.deltaTime;
+                slider.value = Mathf.Clamp(slider.value, 0f, maxSprintTime);
+            }
+            else {
+                inUse = false;
+                currWaitTime = 0f;
+            }
+        }
+        else
+        {
+            if (slider.value < slider.maxValue)
+            {
+                if (currWaitTime < maxWaitTime)
+                {
+                    currWaitTime += Time.deltaTime;
+                } 
+                else
+                {
+                    slider.value += Time.deltaTime;
+                    slider.value = Mathf.Clamp(slider.value, 0f, maxSprintTime);
+                }
+            }
+
+        }
     }
 
-    void ChangeSprint(float amount)
+    public void setInUse(bool use)
     {
-        Debug.Log("Changing health by " + amount);
-        slider.maxValue += amount;
-        slider.value += amount;
+        inUse = use;
     }
+
+    public bool getInUse()
+    {
+        return inUse;
+    }
+
+
+    // public SprintSystem sprintSystem;
+
+    // public Slider slider;
+
+    // public Image fill;
+
+    // bool canRegen = false;
+
+
+    // private void Awake()
+    // {
+    //     sprintSystem.onSprintChanged += ChangeSprint;
+    // }
+
+    // private void OnDisable()
+    // {
+    //     sprintSystem.onSprintChanged -= ChangeSprint;
+    // }
+
+    // void Update() {
+        
+    // }
+
+    // void SetSprint(float amount)
+    // {
+    //     slider.maxValue = amount
+    //     slider.value = amount;
+    // }
+
+    // void UseSprint()
+    // {
+    //     Debug.Log("Changing health by " + amount);
+    //     slider.maxValue -= Time.deltaTime;
+    //     slider.value += amount;
+    // }
+
+    // void RegenSprint()
+    // {
+    //     while (slider.value < )
+    //     slider.value += Time.deltaTime;
+    // }
 
 
 }

@@ -5,14 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public SprintSystem sprintSystem;
+    public SprintBar sprintBar;
 
     public Rigidbody2D rb;
     public Animator animator;
 
     public float moveSpeed = 5;
     public float sprintSpeed;
-    //public float sprintDuration = 2;
 
     private float moveSpeedSaved;
 
@@ -21,7 +20,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        sprintSystem = GetComponent<SprintSystem>();
         rb = GetComponent<Rigidbody2D>();
         moveSpeedSaved = moveSpeed;
     }
@@ -68,11 +66,13 @@ public class PlayerController : MonoBehaviour
 
     public void StartSprint()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && moveSpeed < sprintSpeed) {
+        if ((Input.GetKeyDown(KeyCode.LeftShift) && moveSpeed < sprintSpeed)) {
             moveSpeed = sprintSpeed;
+            sprintBar.setInUse(true);
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift) && moveSpeed > moveSpeedSaved) {
+        else if (Input.GetKeyUp(KeyCode.LeftShift) && moveSpeed > moveSpeedSaved) {
             moveSpeed = moveSpeedSaved;
+            sprintBar.setInUse(false);
         }
     }
     // private IEnumerator Sprint()

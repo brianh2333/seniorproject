@@ -19,6 +19,7 @@ public class HealthBar : MonoBehaviour
         fill.color = gradient.Evaluate(1f);
         healthSystem.onHealthChanged += ChangeHealth;
         healthSystem.onHealthIncreased += ChangeHealth;
+
     }
 
     private void OnDisable()
