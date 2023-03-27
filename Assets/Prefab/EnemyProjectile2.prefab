@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8598378236040898301}
   - component: {fileID: -6670419482445314381}
   m_Layer: 6
-  m_Name: EnemyProjectile
+  m_Name: EnemyProjectile2
   m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ Transform:
   m_GameObject: {fileID: 695765747111586531}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.55, y: 0.69, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8746449702188192849}
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3.5
   lifeTime: 2
-  dmg: 15
+  dmg: 10
   player: {fileID: 0}
 --- !u!50 &-6670419482445314381
 Rigidbody2D:

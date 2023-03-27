@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SprintBar : MonoBehaviour
 {
-    // public delegate void OnSprintChanged(float health, float maxHealth);
-    // public event OnSprintChanged onSprintChanged = delegate { };
+    public delegate void OnSprintFinished();
+    public event OnSprintFinished onSprintFinished = delegate { };
 
     public Slider slider;
 
@@ -42,6 +42,7 @@ public class SprintBar : MonoBehaviour
             }
             else {
                 inUse = false;
+                onSprintFinished();
                 currWaitTime = 0f;
             }
         }

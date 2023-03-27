@@ -25,6 +25,16 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    private void OnEnable()
+    {
+        sprintBar.onSprintFinished += OnSprintFinished;
+    }
+
+    private void OnDisable()
+    {
+        sprintBar.onSprintFinished -= OnSprintFinished;
+    }
     void Update()
     {
 
@@ -74,6 +84,11 @@ public class PlayerController : MonoBehaviour
             moveSpeed = moveSpeedSaved;
             sprintBar.setInUse(false);
         }
+    }
+
+    public void OnSprintFinished()
+    {
+        moveSpeed = moveSpeedSaved;
     }
     // private IEnumerator Sprint()
     // {
