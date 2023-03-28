@@ -21,18 +21,24 @@ public class GameManager : MonoBehaviour
 
     public GameObject pauseScreen;
 
+    public GameObject player;
+
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape) && !pauseScreen.activeSelf)
-        {
+        if (pauseScreen != null) {
+            if (Input.GetKey(KeyCode.Escape) && !pauseScreen.activeSelf)
+            {
 
-            PauseGame();
+                PauseGame();
+            }
         }
     }
 
     void Awake()
     {
         _instance = this;
+        player = GameObject.FindWithTag("Player");
+        Time.timeScale = 1f;
     }
 
     public void Reload()
@@ -40,14 +46,29 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Level1");
     }
 
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
     public void PauseGame()
     {
         pauseScreen.SetActive(true);
+        player.GetComponent<PlayerController>().enabled = false;
         Time.timeScale = 0f;
     }
     public void Resume()
     {
         Time.timeScale = 1f;
         pauseScreen.SetActive(false);
+        player.GetComponent<PlayerController>().enabled = true;
+    }
+
+    public void Play() {
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void Exit() {
+        Application.Quit();
     }
 }

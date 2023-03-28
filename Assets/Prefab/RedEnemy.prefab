@@ -393,7 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotPosition: {fileID: 4982020742741763108}
-  prefab: {fileID: 695765747111586531, guid: 9f156b2cf2eb32e49af739161bb34d44, type: 3}
+  prefab: {fileID: 695765747111586531, guid: 435c05702731c49ac888b431ccd966be, type: 3}
   player: {fileID: 3265284597816869794, guid: 9289b147c63bce048b6fc2986544ed3b, type: 3}
   reloadMaxTime: 0.5
   maxAmmo: 1
@@ -694,3 +694,5 @@ MonoBehaviour:
   high: {r: 0.28926417, g: 0.8962264, b: 0.18178178, a: 1}
   slider: {fileID: 4982020742783849655}
   offset: {x: 0.1, y: 0.6, z: 0}
+  velocity: 0
+  maxSpeed: 0.3

@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    
     public SprintBar sprintBar;
-
     public Rigidbody2D rb;
     public Animator animator;
+    public Transform playerSpawn;
 
     public float moveSpeed = 5;
     public float sprintSpeed;
@@ -18,10 +19,12 @@ public class PlayerController : MonoBehaviour
     Vector2 movementInput;
     Vector2 mousePosition;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         moveSpeedSaved = moveSpeed;
+        transform.position = playerSpawn.transform.position;
     }
 
     // Update is called once per frame

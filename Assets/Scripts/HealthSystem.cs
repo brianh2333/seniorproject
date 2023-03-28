@@ -101,6 +101,10 @@ public class HealthSystem : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public float GetHealth() {
+        return health;
+    }
+
     public float GetMaxHealth() {
         return maxHealth;
     }

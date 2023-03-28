@@ -11,32 +11,43 @@ public class EnemyHealthBar : MonoBehaviour
     public Color high;
 
     public Slider slider;
+
     [SerializeField] private Vector3 offset;
+
+    [SerializeField] private float velocity;
+
+    [SerializeField] private float maxSpeed = 0.3f;
 
     private void Awake()
     {
         healthSystem = GetComponentInParent<HealthSystem>();
-        healthSystem.onHealthChanged += ChangeHealth;
+        SetHealth(healthSystem.GetMaxHealth());
+        //healthSystem.onHealthChanged += ChangeHealth;
+    }
+
+
+    void Update() {
+
+        transform.position = transform.parent.position + offset;
+
+        if (slider.value != healthSystem.GetHealth()) {
+
+            slider.value = Mathf.SmoothDamp(slider.value, healthSystem.GetHealth(), ref velocity, maxSpeed);
+            slider.gameObject.SetActive(true);
+            slider.fillRect.GetComponentInChildren<Image>().color = Color.Lerp(low, high, slider.normalizedValue);
+        }
     }
 
     private void OnDisable()
     {
-        healthSystem.onHealthChanged -= ChangeHealth;
+        //healthSystem.onHealthChanged -= ChangeHealth;
     }
 
-    void ChangeHealth(float newHealth, float maxHealth)
+    void SetHealth(float maxHealth)
     {
         //Debug.Log("Calling ChangeHealth");
         slider.maxValue = maxHealth;
-        slider.value = newHealth;
-        slider.gameObject.SetActive(newHealth < maxHealth);
-
-        slider.fillRect.GetComponentInChildren<Image>().color = Color.Lerp(low, high, slider.normalizedValue);
+        slider.value = maxHealth;
     }
 
-
-    void Update()
-    {
-        transform.position = transform.parent.position + offset;
-    }
 }

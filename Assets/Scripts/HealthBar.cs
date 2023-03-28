@@ -13,18 +13,29 @@ public class HealthBar : MonoBehaviour
 
     public Image fill;
 
+    [SerializeField] private float velocity;
+
+    [SerializeField] private float maxSpeed = 0.3f;
+
 
     private void Awake()
     {
         fill.color = gradient.Evaluate(1f);
-        healthSystem.onHealthChanged += ChangeHealth;
+        //healthSystem.onHealthChanged += ChangeHealth;
         healthSystem.onHealthIncreased += ChangeHealth;
 
     }
 
+    void Update() {
+        if (slider.value != healthSystem.GetHealth()) {
+            slider.value = Mathf.SmoothDamp(slider.value, healthSystem.GetHealth(), ref velocity, maxSpeed);
+            fill.color = gradient.Evaluate(slider.normalizedValue);
+        }
+    }
+
     private void OnDisable()
     {
-        healthSystem.onHealthChanged -= ChangeHealth;
+        //healthSystem.onHealthChanged -= ChangeHealth;
         healthSystem.onHealthIncreased -= ChangeHealth;
     }
 
