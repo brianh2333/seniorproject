@@ -41,12 +41,14 @@ public class EnemyProjectile : MonoBehaviour
         if (collision.CompareTag("Obstacle"))
         {
             hitObstacle = true;
+            FindObjectOfType<AudioManager>().Play("Impact");
             StartCoroutine(Destroy());
 
         }
         else if (collision.CompareTag("Player"))
         {
             //Debug.Log("Hit player");
+            FindObjectOfType<AudioManager>().Play("PlayerImpact");
             hitPlayer = true;
             collision.gameObject.GetComponent<HealthSystem>().ChangeHealth(dmg, false);
             StartCoroutine(Destroy());

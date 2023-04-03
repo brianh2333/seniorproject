@@ -17,6 +17,7 @@ public class PickUp : MonoBehaviour
         {
             if (CompareTag("Collectible"))
             {
+                FindObjectOfType<AudioManager>().Play("Powerup");
                 if(name.Contains("HealthOrb"))
                 {
                     player.GetComponent<HealthSystem>().ChangeHealth(20, true);

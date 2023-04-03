@@ -68,7 +68,6 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        //rb.velocity = new Vector2(movementInput.x * moveSpeed, movementInput.y * moveSpeed);
         rb.velocity = movementInput * moveSpeed;
     }
 

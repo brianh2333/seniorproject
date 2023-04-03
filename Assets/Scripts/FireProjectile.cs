@@ -57,6 +57,7 @@ public class FireProjectile : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && powerUpAmmo > 0)
             {
+                FindObjectOfType<AudioManager>().Play("KnifeThrow");
                 powerUpAmmo--;
                 Vector3 pos = new Vector3(shotPosition.position.x, shotPosition.position.y, 0);
                 projPooler.SpawnFromPool("GoldKnife", pos, shotPosition.rotation);
@@ -65,6 +66,7 @@ public class FireProjectile : MonoBehaviour
             }
             else if (Input.GetMouseButtonDown(0) && ammo >= 0)
             {
+                FindObjectOfType<AudioManager>().Play("KnifeThrow");
                 Vector3 pos = new Vector3(shotPosition.position.x, shotPosition.position.y, 0);
                 projPooler.SpawnFromPool("Knife", pos, shotPosition.rotation);
                 fireRateSeconds = fireRate;

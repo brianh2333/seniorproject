@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
 
+    public GameObject crossfade;
+
     private void Update()
     {
         if (pauseScreen != null) {
@@ -37,18 +39,19 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         _instance = this;
+        crossfade.GetComponent<Animator>().SetTrigger("FadeOut");
         player = GameObject.FindWithTag("Player");
         Time.timeScale = 1f;
     }
 
     public void Reload()
     {
-        SceneManager.LoadScene("Level1");
+        StartCoroutine(ReloadIEnumerator());
     }
 
     public void ReturnToMenu()
     {
-        SceneManager.LoadScene("Menu");
+        StartCoroutine(MenuIEnumerator());
     }
 
     public void PauseGame()
@@ -70,5 +73,19 @@ public class GameManager : MonoBehaviour
 
     public void Exit() {
         Application.Quit();
+    }
+
+    public IEnumerator ReloadIEnumerator()
+    {
+        crossfade.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Level1");
+    }
+
+    public IEnumerator MenuIEnumerator()
+    {
+        crossfade.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Menu");
     }
 }

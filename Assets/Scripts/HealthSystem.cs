@@ -39,12 +39,7 @@ public class HealthSystem : MonoBehaviour
 
     private void Update()
     {
-        if (health <= 0 && isPlayer)
-        {
-            DeathScreen.SetActive(true);
-            gameObject.SetActive(false);
-        }
-        if (health <= 0 && !isPlayer)
+        if (health <= 0)
         {
             Despawn();
         }
@@ -97,8 +92,15 @@ public class HealthSystem : MonoBehaviour
         if (!isPlayer)
         {
             EnemiesRemaining.Instance.Remove();
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else
+        {
+            FindObjectOfType<AudioManager>().Play("Death");
+            DeathScreen.SetActive(true);
+            gameObject.SetActive(false);
+        }
+
     }
 
     public float GetHealth() {
@@ -108,4 +110,5 @@ public class HealthSystem : MonoBehaviour
     public float GetMaxHealth() {
         return maxHealth;
     }
+
 }
