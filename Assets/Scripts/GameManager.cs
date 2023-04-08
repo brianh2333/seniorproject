@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject crossfade;
 
+    public GameObject instructionsPart1;
+
+    public GameObject instructionsPart2;
+
     private void Update()
     {
         if (pauseScreen != null) {
@@ -44,16 +48,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void Reload()
-    {
-        StartCoroutine(ReloadIEnumerator());
-    }
-
-    public void ReturnToMenu()
-    {
-        StartCoroutine(MenuIEnumerator());
-    }
-
     public void PauseGame()
     {
         pauseScreen.SetActive(true);
@@ -68,11 +62,68 @@ public class GameManager : MonoBehaviour
     }
 
     public void Play() {
-        SceneManager.LoadScene("Level1");
+        StartCoroutine(PlayIEnumerator());
     }
 
     public void Exit() {
         Application.Quit();
+    }
+
+    public void InstructionsPart1() {
+        StartCoroutine(InstructionsPart1IEnumerator());
+    }
+
+    public void InstructionsPart2() {
+        StartCoroutine(InstructionsPart2IEnumerator());
+    }
+
+    //From the instructions
+    public void ReturnToMenu() {
+        StartCoroutine(ReturnToMenuIEnumerator());
+    }
+
+    public void Reload()
+    {
+        StartCoroutine(ReloadIEnumerator());
+    }
+
+    //From the game scene
+    public void Menu()
+    {
+        StartCoroutine(MenuIEnumerator());
+    }
+
+
+    public IEnumerator PlayIEnumerator()
+    {
+        crossfade.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Level1");
+    }
+
+    public IEnumerator InstructionsPart1IEnumerator()
+    {
+        crossfade.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1f);
+        instructionsPart1.SetActive(true);
+        crossfade.GetComponent<Animator>().SetTrigger("FadeOut");
+    }
+
+    public IEnumerator InstructionsPart2IEnumerator()
+    {
+        crossfade.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1f);
+        instructionsPart1.SetActive(false);
+        instructionsPart2.SetActive(true);
+        crossfade.GetComponent<Animator>().SetTrigger("FadeOut");
+    }
+
+    public IEnumerator ReturnToMenuIEnumerator()
+    {
+        crossfade.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(1f);
+        instructionsPart2.SetActive(false);
+        crossfade.GetComponent<Animator>().SetTrigger("FadeOut");
     }
 
     public IEnumerator ReloadIEnumerator()
@@ -88,4 +139,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("Menu");
     }
+
+    
 }

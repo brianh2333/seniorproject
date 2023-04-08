@@ -91,6 +91,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (!isPlayer)
         {
+            FindObjectOfType<AudioManager>().Play("Grunt");
             EnemiesRemaining.Instance.Remove();
             Destroy(gameObject);
         }

@@ -42,7 +42,7 @@ public class EnemiesRemaining : MonoBehaviour
 
     public void SetUI(Transform room)
     {
-        Debug.Log("Room: " + room.gameObject.name);
+        //Debug.Log("Room: " + room.gameObject.name);
 
         if (roomsActivated[currRoomIndex] == false && room.gameObject == rooms[currRoomIndex])
         {
@@ -59,6 +59,7 @@ public class EnemiesRemaining : MonoBehaviour
     public void RoomClear()
     {
         //roomsActivated[currRoomIndex] = true;
+        FindObjectOfType<AudioManager>().Play("Ding");
         doors[currRoomIndex++].SetActive(false);
         Debug.Log("Room clear");
     }
@@ -66,10 +67,10 @@ public class EnemiesRemaining : MonoBehaviour
     //Necessary otherwise the childCount will not update fast enough after a Skull is destroyed.
     IEnumerator RemoveSkull()
     {
-        Debug.Log("Removing " + transform.GetChild(0).gameObject.name);
+        //Debug.Log("Removing " + transform.GetChild(0).gameObject.name);
         Destroy(transform.GetChild(0).gameObject);
         yield return new WaitForSeconds(.1f);
-        Debug.Log("ChildCount: " + transform.childCount);
+        //Debug.Log("ChildCount: " + transform.childCount);
 
         if (transform.childCount == 0)
         {
