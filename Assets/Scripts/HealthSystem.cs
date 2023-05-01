@@ -22,6 +22,8 @@ public class HealthSystem : MonoBehaviour
 
     public bool isPlayer = false;
 
+    private bool isInvincible = false;
+
 
     void Start()
     {
@@ -64,8 +66,12 @@ public class HealthSystem : MonoBehaviour
         }
         else
         {
-            if (health > 0)
+            if (health > 0 && !isInvincible)
             {
+                if (isPlayer) {
+                    isInvincible = true;
+                    StartCoroutine(Invincibility());
+                }
                 float prevHealth = health;
                 if (amount > health)
                 {
@@ -110,6 +116,11 @@ public class HealthSystem : MonoBehaviour
 
     public float GetMaxHealth() {
         return maxHealth;
+    }
+
+    private IEnumerator Invincibility() {
+        yield return new WaitForSeconds(.5f);
+        isInvincible = false;
     }
 
 }

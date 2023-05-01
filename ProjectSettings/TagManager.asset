@@ -16,6 +16,7 @@ TagManager:
   - Room
   - Door
   - DoorUI
+  - CurrRoomText
   layers:
   - Default
   - TransparentFX

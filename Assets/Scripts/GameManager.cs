@@ -19,8 +19,11 @@ public class GameManager : MonoBehaviour
             }
     }
 
+    //public GameObject roomText;
+
     public GameObject pauseScreen;
 
+    [HideInInspector]
     public GameObject player;
 
     public GameObject crossfade;
@@ -45,7 +48,12 @@ public class GameManager : MonoBehaviour
         _instance = this;
         crossfade.GetComponent<Animator>().SetTrigger("FadeOut");
         player = GameObject.FindWithTag("Player");
+        //roomText = GameObject.FindWithTag("CurrRoom");
         Time.timeScale = 1f;
+    }
+
+    public void SetRoomText(int r) {
+        //roomText.text = "Room\n" + r;
     }
 
     public void PauseGame()
