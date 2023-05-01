@@ -52,11 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2fe4786297b0a429351968416f4ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprintBar: {fileID: 6829013707527440922, guid: 558f6a01c96c1af43b37ee1d6ec32e6e, type: 3}
   rb: {fileID: 3265284597816869792}
   animator: {fileID: 3265284598296247685}
-  moveSpeed: 3
-  sprint: 1
-  sprintDuration: 2
+  playerSpawn: {fileID: 0}
+  moveSpeed: 2.5
+  sprintSpeed: 3.5
 --- !u!50 &3265284597816869792
 Rigidbody2D:
   serializedVersion: 4
@@ -107,8 +108,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  maxAmmo: 10
-  powerUpMaxAmmo: 0
+  ammoMax: 0
+  powerUpAmmoMax: 0
   reloadMaxTime: 1
   fireRate: 0.5
 --- !u!114 &3265284597816869797
@@ -123,9 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67920f2c3a285554e8937585d59d8130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesRemaining: {fileID: 0}
   health: 100
   maxHealth: 100
+  DeathScreen: {fileID: 0}
   isPlayer: 1
 --- !u!61 &3265284597816869803
 BoxCollider2D:
