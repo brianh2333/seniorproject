@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject instructionsPart2;
 
+    public GameObject boss;
+
+    public GameObject endScreen;
+
     private void Update()
     {
         if (pauseScreen != null) {
@@ -37,6 +41,10 @@ public class GameManager : MonoBehaviour
 
                 PauseGame();
             }
+        }
+
+        if (boss.activeSelf == false) {
+            endScreen.SetActive(true);
         }
     }
 
