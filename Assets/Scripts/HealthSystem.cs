@@ -21,6 +21,7 @@ public class HealthSystem : MonoBehaviour
     public GameObject DeathScreen;
 
     public bool isPlayer = false;
+    public bool isInvulnerable;
 
 
     void Start()
@@ -64,8 +65,13 @@ public class HealthSystem : MonoBehaviour
         }
         else
         {
-            if (health > 0)
+            if (health > 0 && !isInvulnerable)
             {
+                if (isPlayer && !isInvulnerable) {
+                    isInvulnerable = true;
+                    StartCoroutine(Invulnerable());
+                }
+
                 float prevHealth = health;
                 if (amount > health)
                 {
@@ -110,6 +116,14 @@ public class HealthSystem : MonoBehaviour
 
     public float GetMaxHealth() {
         return maxHealth;
+    }
+
+    IEnumerator Invulnerable() {
+        if (isInvulnerable) {
+            yield return new WaitForSeconds(.2f);
+            isInvulnerable = false;
+        }
+        yield return null;
     }
 
 }

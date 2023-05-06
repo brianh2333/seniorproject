@@ -52,11 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2fe4786297b0a429351968416f4ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprintBar: {fileID: 0}
   rb: {fileID: 3265284597816869792}
   animator: {fileID: 3265284598296247685}
+  playerSpawn: {fileID: 0}
   moveSpeed: 3
-  sprint: 1
-  sprintDuration: 2
+  sprintSpeed: 0
 --- !u!50 &3265284597816869792
 Rigidbody2D:
   serializedVersion: 4
@@ -107,8 +108,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  maxAmmo: 10
-  powerUpMaxAmmo: 0
+  ammoMax: 0
+  powerUpAmmoMax: 0
   reloadMaxTime: 1
   fireRate: 0.5
 --- !u!114 &3265284597816869797
@@ -123,9 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67920f2c3a285554e8937585d59d8130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesRemaining: {fileID: 0}
   health: 100
   maxHealth: 100
+  DeathScreen: {fileID: 0}
   isPlayer: 1
 --- !u!61 &3265284597816869803
 BoxCollider2D:
@@ -272,7 +273,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 2
   m_Sprite: {fileID: -468493853, guid: 561c267b1238a7740b98e4f1075dc484, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
