@@ -42,6 +42,10 @@ public class HealthSystem : MonoBehaviour
     {
         if (health <= 0)
         {
+            if (gameObject.name == "Boss") 
+            {
+                gameObject.SetActive(false);
+            }
             Despawn();
         }
     }
