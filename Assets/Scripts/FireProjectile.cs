@@ -26,6 +26,9 @@ public class FireProjectile : MonoBehaviour
     private float fireRateSeconds = 0;
     private float reloadTime;
 
+    public GameObject gKnife;
+    public GameObject knife;
+
     private void Awake()
     {
         ammoMax = 10;//ProjectilePooler.Instance.GetPoolSize("Knife");
@@ -60,7 +63,7 @@ public class FireProjectile : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("KnifeThrow");
                 powerUpAmmo--;
                 Vector3 pos = new Vector3(shotPosition.position.x, shotPosition.position.y, 0);
-                projPooler.SpawnFromPool("GoldKnife", pos, shotPosition.rotation);
+                Instantiate(gKnife, pos, shotPosition.rotation);
                 fireRateSeconds = fireRate;
                 powerUpAmmoUI[powerUpAmmoIndex--].SetActive(false);
             }
@@ -68,7 +71,7 @@ public class FireProjectile : MonoBehaviour
             {
                 FindObjectOfType<AudioManager>().Play("KnifeThrow");
                 Vector3 pos = new Vector3(shotPosition.position.x, shotPosition.position.y, 0);
-                projPooler.SpawnFromPool("Knife", pos, shotPosition.rotation);
+                Instantiate(knife, pos, shotPosition.rotation);
                 fireRateSeconds = fireRate;
                 ammoUI[ammo--].SetActive(false);
             }

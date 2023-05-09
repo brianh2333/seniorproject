@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3265284597816869793}
   - component: {fileID: 3265284597816869799}
-  - component: {fileID: 3265284597816869792}
   - component: {fileID: 3265284597816869798}
   - component: {fileID: 3265284597816869797}
   - component: {fileID: 3265284597816869803}
   - component: {fileID: 2988618353759802569}
+  - component: {fileID: 3265284597816869792}
   - component: {fileID: 4340570197965528399}
   m_Layer: 9
   m_Name: Player
@@ -56,29 +56,8 @@ MonoBehaviour:
   rb: {fileID: 3265284597816869792}
   animator: {fileID: 3265284598296247685}
   playerSpawn: {fileID: 0}
-  moveSpeed: 3
+  moveSpeed: 4
   sprintSpeed: 0
---- !u!50 &3265284597816869792
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3265284597816869794}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!114 &3265284597816869798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +91,8 @@ MonoBehaviour:
   powerUpAmmoMax: 0
   reloadMaxTime: 1
   fireRate: 0.5
+  gKnife: {fileID: 0}
+  knife: {fileID: 0}
 --- !u!114 &3265284597816869797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +109,7 @@ MonoBehaviour:
   maxHealth: 100
   DeathScreen: {fileID: 0}
   isPlayer: 1
+  isInvulnerable: 0
 --- !u!61 &3265284597816869803
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -184,6 +166,27 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!50 &3265284597816869792
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265284597816869794}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!58 &4340570197965528399
 CircleCollider2D:
   m_ObjectHideFlags: 0

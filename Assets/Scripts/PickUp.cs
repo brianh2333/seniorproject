@@ -28,11 +28,6 @@ public class PickUp : MonoBehaviour
                     player.GetComponent<FireProjectile>().AddPowerUpAmmo();
                     Destroy(gameObject);
                 }
-                if (name.Contains("SpeedBoost"))
-                {
-                    player.GetComponent<PlayerController>().StartSprint();
-                    Destroy(gameObject);
-                }
                 if (name.Contains("Armor")) {
                     player.GetComponent<HealthSystem>().IncreaseHealth(10);
                     Destroy(gameObject);
